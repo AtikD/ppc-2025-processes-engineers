@@ -2,13 +2,15 @@
 
 #include <algorithm>
 #include <limits>
+#include <utility>
 #include <vector>
 
 namespace dilshodov_a_max_val_rows_matrix {
 
 MaxValRowsMatrixTaskSequential::MaxValRowsMatrixTaskSequential(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
-  GetInput() = in;
+  InType copy = in;
+  GetInput().swap(copy);
 }
 
 bool MaxValRowsMatrixTaskSequential::ValidationImpl() {

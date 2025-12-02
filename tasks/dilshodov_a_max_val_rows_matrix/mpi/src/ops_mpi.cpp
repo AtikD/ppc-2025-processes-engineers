@@ -5,13 +5,15 @@
 #include <algorithm>
 #include <cstddef>
 #include <limits>
+#include <utility>
 #include <vector>
 
 namespace dilshodov_a_max_val_rows_matrix {
 
 MaxValRowsMatrixTaskMPI::MaxValRowsMatrixTaskMPI(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
-  GetInput() = in;
+  InType copy = in;
+  GetInput().swap(copy);
 }
 
 bool MaxValRowsMatrixTaskMPI::ValidationImpl() {
