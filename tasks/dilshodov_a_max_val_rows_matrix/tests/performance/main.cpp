@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-
 #include <mpi.h>
 
 #include <algorithm>
@@ -51,10 +50,14 @@ class DilshodovMaxValRowsMatrixPerfTest : public ppc::util::BaseRunPerfTests<InT
     return output_data == expected_output_;
   }
 
-  InType GetTestInputData() final { return input_data_; }
+  InType GetTestInputData() final {
+    return input_data_;
+  }
 };
 
-TEST_P(DilshodovMaxValRowsMatrixPerfTest, RunPerfModes) { ExecuteTest(GetParam()); }
+TEST_P(DilshodovMaxValRowsMatrixPerfTest, RunPerfModes) {
+  ExecuteTest(GetParam());
+}
 
 const auto kAllPerfTasks = ppc::util::MakeAllPerfTasks<InType, MaxValRowsMatrixTaskMPI, MaxValRowsMatrixTaskSequential>(
     PPC_SETTINGS_dilshodov_a_max_val_rows_matrix);

@@ -103,8 +103,7 @@ void MaxValRowsMatrixTaskMPI::RunMaster(int rows, int cols, int base_rows, int e
     send_buffers[proc - 1].resize(static_cast<size_t>(proc_rows) * cols);
 
     for (int i = 0; i < proc_rows; ++i) {
-      std::ranges::copy(input[row_offset + i],
-                        send_buffers[proc - 1].data() + (static_cast<std::ptrdiff_t>(i) * cols));
+      std::ranges::copy(input[row_offset + i], send_buffers[proc - 1].data() + (static_cast<std::ptrdiff_t>(i) * cols));
     }
 
     MPI_Isend(send_buffers[proc - 1].data(), proc_rows * cols, MPI_INT, proc, 0, MPI_COMM_WORLD,

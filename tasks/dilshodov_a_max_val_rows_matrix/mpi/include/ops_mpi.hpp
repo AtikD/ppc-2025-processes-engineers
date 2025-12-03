@@ -20,10 +20,9 @@ class MaxValRowsMatrixTaskMPI : public BaseTask {
   bool RunImpl() override;
   bool PostProcessingImpl() override;
 
-  void RunMaster(int rows, int cols, int base_rows, int extra_rows, int local_rows,
-                 std::vector<int> &local_matrix, std::vector<int> &local_max);
-  static void RunWorker(int cols, int local_rows, std::vector<int> &local_matrix,
-                        std::vector<int> &local_max);
+  void RunMaster(int rows, int cols, int base_rows, int extra_rows, int local_rows, std::vector<int> &local_matrix,
+                 std::vector<int> &local_max);
+  static void RunWorker(int cols, int local_rows, std::vector<int> &local_matrix, std::vector<int> &local_max);
 };
 
 }  // namespace dilshodov_a_max_val_rows_matrix
