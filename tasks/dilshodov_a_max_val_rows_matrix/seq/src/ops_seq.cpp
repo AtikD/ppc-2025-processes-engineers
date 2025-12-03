@@ -1,9 +1,10 @@
 #include "dilshodov_a_max_val_rows_matrix/seq/include/ops_seq.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <limits>
-#include <utility>
-#include <vector>
+
+#include "dilshodov_a_max_val_rows_matrix/common/include/common.hpp"
 
 namespace dilshodov_a_max_val_rows_matrix {
 
@@ -22,12 +23,7 @@ bool MaxValRowsMatrixTaskSequential::ValidationImpl() {
   if (cols == 0) {
     return false;
   }
-  for (const auto &row : input) {
-    if (row.size() != cols) {
-      return false;
-    }
-  }
-  return true;
+  return std::ranges::all_of(input, [&](const auto &row) { return row.size() == cols; });
 }
 
 bool MaxValRowsMatrixTaskSequential::PreProcessingImpl() {

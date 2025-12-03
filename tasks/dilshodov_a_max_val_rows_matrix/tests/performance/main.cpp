@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
+
 #include <mpi.h>
 
 #include <algorithm>
 #include <random>
-#include <vector>
 
 #include "dilshodov_a_max_val_rows_matrix/common/include/common.hpp"
 #include "dilshodov_a_max_val_rows_matrix/mpi/include/ops_mpi.hpp"
@@ -16,8 +16,8 @@ namespace dilshodov_a_max_val_rows_matrix {
 class DilshodovMaxValRowsMatrixPerfTest : public ppc::util::BaseRunPerfTests<InType, OutType> {
   static constexpr int kRows = 5000;
   static constexpr int kCols = 5000;
-  InType input_data_{};
-  OutType expected_output_{};
+  InType input_data_;
+  OutType expected_output_;
 
   void SetUp() override {
     input_data_.resize(kRows);
@@ -25,7 +25,7 @@ class DilshodovMaxValRowsMatrixPerfTest : public ppc::util::BaseRunPerfTests<InT
       input_data_[i].resize(kCols);
     }
 
-    std::mt19937 gen(42);
+    std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<int> dist(-10000, 10000);
 
     for (int i = 0; i < kRows; ++i) {
@@ -51,14 +51,10 @@ class DilshodovMaxValRowsMatrixPerfTest : public ppc::util::BaseRunPerfTests<InT
     return output_data == expected_output_;
   }
 
-  InType GetTestInputData() final {
-    return input_data_;
-  }
+  InType GetTestInputData() final { return input_data_; }
 };
 
-TEST_P(DilshodovMaxValRowsMatrixPerfTest, RunPerfModes) {
-  ExecuteTest(GetParam());
-}
+TEST_P(DilshodovMaxValRowsMatrixPerfTest, RunPerfModes) { ExecuteTest(GetParam()); }
 
 const auto kAllPerfTasks = ppc::util::MakeAllPerfTasks<InType, MaxValRowsMatrixTaskMPI, MaxValRowsMatrixTaskSequential>(
     PPC_SETTINGS_dilshodov_a_max_val_rows_matrix);

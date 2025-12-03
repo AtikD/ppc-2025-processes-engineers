@@ -7,7 +7,6 @@
 #include <random>
 #include <string>
 #include <tuple>
-#include <vector>
 
 #include "dilshodov_a_max_val_rows_matrix/common/include/common.hpp"
 #include "dilshodov_a_max_val_rows_matrix/mpi/include/ops_mpi.hpp"
@@ -35,7 +34,7 @@ class DilshodovMaxValRowsMatrixFuncTest : public ppc::util::BaseRunFuncTests<InT
       input_data_[i].resize(cols);
     }
 
-    std::mt19937 gen(42);
+    std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<int> dist(-1000, 1000);
 
     for (int i = 0; i < rows; ++i) {
