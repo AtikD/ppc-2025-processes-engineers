@@ -54,7 +54,9 @@ class DilshodovARingFuncTest : public ppc::util::BaseRunFuncTests<InType, OutTyp
     return output_data == expected_output_;
   }
 
-  InType GetTestInputData() final { return input_data_; }
+  InType GetTestInputData() final {
+    return input_data_;
+  }
 
  private:
   InType input_data_{};
@@ -63,11 +65,13 @@ class DilshodovARingFuncTest : public ppc::util::BaseRunFuncTests<InType, OutTyp
 
 namespace {
 
-TEST_P(DilshodovARingFuncTest, RingTransfer) { ExecuteTest(GetParam()); }
+TEST_P(DilshodovARingFuncTest, RingTransfer) {
+  ExecuteTest(GetParam());
+}
 
 const std::array<TestType, 6> kTestParam = {
-    std::make_tuple(1, "single"),    std::make_tuple(5, "small"),       std::make_tuple(50, "medium_50"),
-    std::make_tuple(100, "medium"),  std::make_tuple(500, "large_500"), std::make_tuple(1000, "large"),
+    std::make_tuple(1, "single"),   std::make_tuple(5, "small"),       std::make_tuple(50, "medium_50"),
+    std::make_tuple(100, "medium"), std::make_tuple(500, "large_500"), std::make_tuple(1000, "large"),
 };
 
 const auto kTestTasksList =

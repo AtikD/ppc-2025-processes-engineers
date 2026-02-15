@@ -45,10 +45,14 @@ class DilshodovARingPerfTest : public ppc::util::BaseRunPerfTests<InType, OutTyp
     return output_data == expected_output_;
   }
 
-  InType GetTestInputData() final { return input_data_; }
+  InType GetTestInputData() final {
+    return input_data_;
+  }
 };
 
-TEST_P(DilshodovARingPerfTest, RunPerfModes) { ExecuteTest(GetParam()); }
+TEST_P(DilshodovARingPerfTest, RunPerfModes) {
+  ExecuteTest(GetParam());
+}
 
 const auto kAllPerfTasks =
     ppc::util::MakeAllPerfTasks<InType, RingTopologyMPI, RingTopologySEQ>(PPC_SETTINGS_dilshodov_a_ring);

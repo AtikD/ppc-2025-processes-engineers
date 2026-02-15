@@ -108,6 +108,8 @@ bool RingTopologyMPI::RunImpl() {
   return true;
 }
 
-bool RingTopologyMPI::PostProcessingImpl() { return true; }
+bool RingTopologyMPI::PostProcessingImpl() {
+  return true;
+}
 
 }  // namespace dilshodov_a_ring

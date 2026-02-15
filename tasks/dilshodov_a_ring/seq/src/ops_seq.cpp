@@ -28,6 +28,8 @@ bool RingTopologySEQ::RunImpl() {
   return true;
 }
 
-bool RingTopologySEQ::PostProcessingImpl() { return true; }
+bool RingTopologySEQ::PostProcessingImpl() {
+  return true;
+}
 
 }  // namespace dilshodov_a_ring
