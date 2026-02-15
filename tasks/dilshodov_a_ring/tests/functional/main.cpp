@@ -24,8 +24,12 @@ class DilshodovARingFuncTest : public ppc::util::BaseRunFuncTests<InType, OutTyp
 
  protected:
   void SetUp() override {
-    int size = 0;
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    int size = 1;
+    if (ppc::util::IsUnderMpirun()) {
+      MPI_Comm_size(MPI_COMM_WORLD, &size);
+    } else {
+      size = ppc::util::GetNumProc();
+    }
 
     TestType params = std::get<static_cast<std::size_t>(ppc::util::GTestParamIndex::kTestParams)>(GetParam());
     int data_size = std::get<0>(params);

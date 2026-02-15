@@ -18,8 +18,12 @@ class DilshodovARingPerfTest : public ppc::util::BaseRunPerfTests<InType, OutTyp
   OutType expected_output_;
 
   void SetUp() override {
-    int size = 0;
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    int size = 1;
+    if (ppc::util::IsUnderMpirun()) {
+      MPI_Comm_size(MPI_COMM_WORLD, &size);
+    } else {
+      size = ppc::util::GetNumProc();
+    }
 
     input_data_.source = 0;
     input_data_.dest = (size > 1) ? size - 1 : 0;
